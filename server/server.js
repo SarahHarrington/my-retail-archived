@@ -1,26 +1,20 @@
-var express = require('express');
-var app = express();
-var port = process.env.PORT || 3000;
-const http = require('http');
+const express = require('express');
+const app = express();
+const port = process.env.PORT || 3000;
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+let Item = require('./public/models/myretailmodel');
 
 app.use(express.static('server/public'));
 
-http.get('http://redsky.target.com/v2/pdp/tcin/13860428?excludes=taxonomy,price,promotion,bulk_ship,rating_and_review_reviews,rating_and_review_statistics,question_answer_statistics', (resp) =>{
-  let data = '';
+mongoose.connect('mongodb://localhost/my-retail');
 
-  resp.on('data', (chunk) => {
-    data = chunk;
-  });
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 
-  resp.on('end', () => {
-    console.log(data);
-  });
-  
-}).on('error', (err) => {
-  console.log('Error:' + err.message);
-})
+let routes = require('./public/routes/myretailRoute');
+routes(app);
 
-
-app.listen(port, function(req, res) {
+app.listen(port, function (req, res) {
   console.log('Listening on port', port);
 })
