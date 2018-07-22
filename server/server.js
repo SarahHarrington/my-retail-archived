@@ -1,13 +1,14 @@
 const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
-const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-let Item = require('./public/models/myretailmodel');
+let Item = require('./public/models/myretailModel');
 
 app.use(express.static('server/public'));
 
-mongoose.connect('mongodb://localhost/my-retail');
+const mongoose = require('mongoose');
+
+mongoose.connect('mongodb://localhost:27017/myretail');
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
