@@ -1,9 +1,9 @@
-// const mongoose = require('mongoose');
-// const Schema = mongoose.Schema;
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
-// const ItemSchema = new Schema({ 
-//   itemNumber: Number,
-//   itemPrice: Number
-// })
+var ItemSchema = new Schema({ 
+  itemNumber: {type: Number},
+  itemPrice: {type: Number}
+})
 
-// module.exports = mongoose.model('Items', ItemSchema);
+module.exports = mongoose.model('Items', ItemSchema);
